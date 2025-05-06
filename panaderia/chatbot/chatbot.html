@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatBot EloBot - Panadería Elohim</title>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fuente Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de colores */
+    :root {
+      --elohim-primary: #e67e22;
+      --elohim-secondary: #d35400;
+      --elohim-light: #f8f9fa;
+      --elohim-dark: #333;
+      --elohim-accent: #f8d775;
+      --elohim-bg: #fff;
+      --elohim-border: #e0e0e0;
+      --elohim-shadow: rgba(0, 0, 0, 0.1);
+      --elohim-success: #4caf50;
+      --elohim-text: #333;
+      --elohim-text-light: #666;
+    }
+
+    /* Estilos base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Widget principal */
+    .elohim-chatbot-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-size: 16px;
+    }
+
+    /* Botón de toggle */
+    .chatbot-toggle-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--elohim-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chatbot-toggle-btn:hover {
+      background-color: var(--elohim-secondary);
+      transform: scale(1.1);
+    }
+
+    .chatbot-toggle-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .chatbot-toggle-btn.active i {
+      transform: rotate(360deg);
+    }
+
+    /* Contenedor del chatbot */
+    .chatbot-container {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 350px;
+      max-height: 70vh;
+      background-color: var(--elohim-bg);
+      border-radius: 16px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      pointer-events: none;
+    }
+
+    .chatbot-container.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+
+    /* Encabezado */
+    .chatbot-header {
+      background: linear-gradient(135deg, var(--elohim-primary), var(--elohim-secondary));
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chatbot-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      background-color: white;
+      padding: 2px;
+    }
+
+    .chatbot-title h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .chatbot-status {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      gap: 6px;
+      opacity: 0.9;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--elohim-success);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .chatbot-close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 5px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .chatbot-close-btn:hover {
+      opacity: 1;
+    }
+
+    /* Área de mensajes */
+    .chatbot-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      scroll-behavior: smooth;
+    }
+
+    /* Estilos para los mensajes */
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bot-message {
+      align-self: flex-start;
+    }
+
+    .user-message {
+      align-self: flex-end;
+    }
+
+    .message-content {
+      padding: 12px 16px;
+      border-radius: 18px;
+      box-shadow: 0 1px 2px var(--elohim-shadow);
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .bot-message .message-content {
+      background-color: white;
+      border-bottom-left-radius: 5px;
+      color: var(--elohim-text);
+    }
+
+    .user-message .message-content {
+      background: linear-gradient(135deg, var(--elohim-primary), var(--elohim-secondary));
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
+
+    .message-content p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: var(--elohim-text-light);
+      margin-top: 5px;
+      align-self: flex-end;
+    }
+
+    .bot-message .message-time {
+      align-self: flex-start;
+    }
+
+    /* Opciones de respuesta rápida */
+    .message-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .option-btn {
+      background-color: white;
+      border: 1px solid var(--elohim-border);
+      border-radius: 18px;
+      padding: 8px 15px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--elohim-text);
+    }
+
+    .option-btn:hover {
+      background-color: #f0f0f0;
+      border-color: #ccc;
+    }
+
+    /* Pie del chatbot */
+    .chatbot-footer {
+      padding: 15px;
+      border-top: 1px solid var(--elohim-border);
+      background-color: white;
+    }
+
+    #chatbot-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #chatbot-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid var(--elohim-border);
+      border-radius: 25px;
+      outline: none;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    #chatbot-input:focus {
+      border-color: var(--elohim-primary);
+    }
+
+    #chatbot-send {
+      background: linear-gradient(135deg, var(--elohim-primary), var(--elohim-secondary));
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(230, 126, 34, 0.3);
+    }
+
+    #chatbot-send:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(230, 126, 34, 0.4);
+    }
+
+    #chatbot-send:active {
+      transform: scale(0.98);
+    }
+
+    /* Indicador de "escribiendo..." */
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: white;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      align-self: flex-start;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      background-color: var(--elohim-text-light);
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 480px) {
+      .elohim-chatbot-widget {
+        bottom: 10px;
+        right: 10px;
+      }
+      
+      .chatbot-container {
+        width: calc(100vw - 40px);
+        max-height: 65vh;
+        bottom: 70px;
+        right: 10px;
+      }
+      
+      .chatbot-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+
+    /* Efecto de carga para mensajes */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .message-loading {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      color: transparent;
+      border-radius: 8px;
+      min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="elohim-chatbot-widget">
+    <button class="chatbot-toggle-btn" id="chatbot-toggle">
+      <i class="fas fa-comment-dots"></i>
+    </button>
+    
+    <div class="chatbot-container" id="chatbot-container">
+      <div class="chatbot-header">
+        <div class="chatbot-title">
+          <img src="https://i.postimg.cc/dtfM2DXJ/Captura-de-pantalla-2025-04-27-125634.png" alt="EloBot" class="chatbot-avatar">
+          <h3>EloBot - Panadería Elohim</h3>
+          <div class="chatbot-status">
+            <span class="status-dot"></span>
+            <span>En línea</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" id="chatbot-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message bot-message">
+          <div class="message-content">
+            <p>¡Hola! 👋 Soy EloBot, tu asistente de Panadería Elohim. ¿En qué puedo ayudarte hoy?</p>
+          </div>
+          <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+        </div>
+      </div>
+      
+      <div class="chatbot-footer">
+        <form id="chatbot-form">
+          <input type="text" id="chatbot-input" placeholder="Escribe tu mensaje..." autocomplete="off">
+          <button type="submit" id="chatbot-send">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Elementos del DOM
+      const chatbotToggle = document.getElementById("chatbot-toggle");
+      const chatbotContainer = document.getElementById("chatbot-container");
+      const chatbotClose = document.getElementById("chatbot-close");
+      const chatbotForm = document.getElementById("chatbot-form");
+      const chatbotInput = document.getElementById("chatbot-input");
+      const chatbotMessages = document.getElementById("chatbot-messages");
+
+      // Estado del chatbot
+      let isChatbotOpen = false;
+      let isTyping = false;
+
+      // Respuestas predefinidas mejoradas
+      const botResponses = {
+        bienvenida: "¡Hola! 👋 Soy EloBot, tu asistente virtual de Panadería Elohim. ¿En qué puedo ayudarte hoy?",
+        productos: {
+          text: "¡Tenemos una gran variedad de productos artesanales! 🥖🍰 Puedes elegir entre:",
+          options: ["Panadería tradicional", "Repostería fina", "Productos especiales", "Promociones"]
+        },
+        panaderia: "Nuestra panadería incluye: pan francés ($2.500), pan integral ($3.000), baguettes ($2.800), pan de queso ($3.200) y más. Todo horneado diariamente con ingredientes naturales.",
+        reposteria: "En repostería ofrecemos: tortas personalizadas (desde $25.000), cupcakes ($3.500 c/u), galletas decoradas ($1.500 c/u), brownies ($2.800) y postres caseros. ¡Perfectos para ocasiones especiales!",
+        promociones: "📢 ¡Promociones de la semana! 🎉<br>- 2 panes franceses + 1 café: $5.000<br>- Docena de medialunas: $12.000<br>- Torta pequeña + 6 cupcakes: $30.000",
+        horarios: "⏰ Horario de atención:<br>Lunes a Viernes: 7:00 AM - 8:00 PM<br>Sábados: 7:00 AM - 6:00 PM<br>Domingos: 8:00 AM - 2:00 PM",
+        ubicacion: "📍 Estamos en:<br>Carrera 5 #49-00, Puerto Berrío, Antioquia<br><a href='https://maps.google.com' target='_blank' style='color: #e67e22;'>Ver en mapa</a>",
+        contacto: "📞 Contáctanos:<br>Teléfono: +57 123 456 7890<br>WhatsApp: +57 123 456 7890<br>Email: info@panaderiaelohim.com",
+        pedidos: "Para hacer pedidos puedes:<br>1. Llamarnos directamente<br>2. Escribirnos por WhatsApp<br>3. Visitar nuestra tienda física<br>¿Quieres que te ayude con algo más?",
+        delivery: "🚚 Servicio a domicilio disponible en Puerto Berrío con un costo adicional de $3.000. Pedidos mínimos de $15.000.",
+        default: "Disculpa, no entendí tu consulta. ¿Podrías reformularla? Estoy aquí para ayudarte con información sobre productos, horarios, ubicación o pedidos."
+      };
+
+      // Mapeo de palabras clave a respuestas
+      const keywordMap = {
+        // Productos
+        'producto|productos|pan|panes|reposteria|dulce|torta|galleta': 'productos',
+        'panaderia|panes|baguette|integral|frances|queso': 'panaderia',
+        'reposteria|torta|pastel|cupcake|galleta|brownie|dulce|postre': 'reposteria',
+        'promocion|oferta|descuento|combo': 'promociones',
+        
+        // Información
+        'hora|horario|abierto|cerrado|atencion': 'horarios',
+        'ubicacion|direccion|donde|mapa|llegar': 'ubicacion',
+        'contacto|telefono|whatsapp|email|correo': 'contacto',
+        
+        // Servicios
+        'pedido|ordenar|comprar|reservar|encargar': 'pedidos',
+        'domicilio|delivery|envio|llevar': 'delivery',
+        
+        // Saludos
+        'hola|buenas|saludos|hey|hi': 'bienvenida'
+      };
+
+      // Abrir/cerrar el chatbot
+      function toggleChatbot() {
+        isChatbotOpen = !isChatbotOpen;
+        chatbotToggle.classList.toggle('active', isChatbotOpen);
+        chatbotContainer.classList.toggle('active', isChatbotOpen);
+        
+        // Guardar estado
+        localStorage.setItem('elohimChatbotOpen', isChatbotOpen);
+        
+        // Enfocar el input al abrir
+        if (isChatbotOpen) {
+          setTimeout(() => {
+            chatbotInput.focus();
+          }, 300);
+        }
+      }
+
+      // Mostrar indicador de "escribiendo"
+      function showTypingIndicator() {
+        if (isTyping) return;
+        
+        isTyping = true;
+        const typingElement = document.createElement('div');
+        typingElement.className = 'message bot-message typing-indicator';
+        typingElement.innerHTML = `
+          <span></span>
+          <span></span>
+          <span></span>
+        `;
+        chatbotMessages.appendChild(typingElement);
+        scrollToBottom();
+      }
+
+      // Ocultar indicador de "escribiendo"
+      function hideTypingIndicator() {
+        isTyping = false;
+        const typingElement = chatbotMessages.querySelector('.typing-indicator');
+        if (typingElement) {
+          typingElement.remove();
+        }
+      }
+
+      // Añadir mensaje al chat
+      function addMessage(text, isUser = false, options = null) {
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+        
+        const timeString = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        messageElement.innerHTML = `
+          <div class="message-content">
+            <p>${text}</p>
+          </div>
+          <span class="message-time">${timeString}</span>
+        `;
+        
+        chatbotMessages.appendChild(messageElement);
+        
+        // Añadir opciones si existen
+        if (options && !isUser) {
+          addResponseOptions(options);
+        }
+        
+        scrollToBottom();
+        return messageElement;
+      }
+
+      // Añadir opciones de respuesta
+      function addResponseOptions(options) {
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'message-options';
+        
+        options.forEach(option => {
+          const button = document.createElement('button');
+          button.className = 'option-btn';
+          button.textContent = option;
+          button.addEventListener('click', () => handleUserInput(option));
+          optionsContainer.appendChild(button);
+        });
+        
+        chatbotMessages.appendChild(optionsContainer);
+        scrollToBottom();
+      }
+
+      // Desplazarse al final del chat
+      function scrollToBottom() {
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      // Procesar entrada del usuario
+      function handleUserInput(input) {
+        // Limpiar y validar input
+        const userMessage = input.trim();
+        if (!userMessage) return;
+        
+        // Añadir mensaje del usuario
+        addMessage(userMessage, true);
+        
+        // Mostrar que el bot está escribiendo
+        showTypingIndicator();
+        
+        // Simular tiempo de respuesta
+        setTimeout(() => {
+          hideTypingIndicator();
+          const botResponse = getBotResponse(userMessage);
+          addMessage(botResponse.text, false, botResponse.options);
+        }, 1000 + Math.random() * 1500); // Tiempo variable entre 1-2.5s
+      }
+
+      // Obtener respuesta del bot basada en el input
+      function getBotResponse(input) {
+        const lowerInput = input.toLowerCase();
+        
+        // Buscar coincidencia con palabras clave
+        for (const [keywords, responseKey] of Object.entries(keywordMap)) {
+          const regex = new RegExp(keywords.split('|').join('|'), 'i');
+          if (regex.test(lowerInput)) {
+            // Respuesta con estructura mejorada
+            if (responseKey === 'productos') {
+              return {
+                text: botResponses.productos.text,
+                options: botResponses.productos.options
+              };
+            }
+            return {
+              text: botResponses[responseKey],
+              options: getDefaultOptions(responseKey)
+            };
+          }
+        }
+        
+        // Respuesta por defecto
+        return {
+          text: botResponses.default,
+          options: getDefaultOptions('default')
+        };
+      }
+
+      // Obtener opciones por defecto según el contexto
+      function getDefaultOptions(context) {
+        switch(context) {
+          case 'productos':
+            return ['Panadería', 'Repostería', 'Promociones', 'Horarios'];
+          case 'panaderia':
+          case 'reposteria':
+          case 'promociones':
+            return ['Hacer pedido', 'Horarios', 'Ubicación', 'Contacto'];
+          default:
+            return ['Productos', 'Horarios', 'Ubicación', 'Contacto'];
+        }
+      }
+
+      // Event Listeners
+      chatbotToggle.addEventListener('click', toggleChatbot);
+      chatbotClose.addEventListener('click', toggleChatbot);
+
+      chatbotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleUserInput(chatbotInput.value);
+        chatbotInput.value = '';
+      });
+
+      // Manejar clics fuera del chatbot para cerrarlo
+      document.addEventListener('click', (e) => {
+        if (isChatbotOpen && 
+            !chatbotContainer.contains(e.target) && 
+            e.target !== chatbotToggle) {
+          toggleChatbot();
+        }
+      });
+
+      // Cargar estado previo
+      if (localStorage.getItem('elohimChatbotOpen') === 'true') {
+        toggleChatbot();
+      }
+
+      // Animación inicial del botón
+      setTimeout(() => {
+        chatbotToggle.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          chatbotToggle.style.transform = 'scale(1)';
+        }, 300);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

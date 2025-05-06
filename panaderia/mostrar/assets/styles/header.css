@@ -1,0 +1,420 @@
+/* Estilos generales del header */
+.header {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header_container {
+  width: 100%;
+  padding: 15px 0;
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+}
+
+.logo_container img {
+  max-width: 120px;
+  height: auto;
+}
+
+/* Estilos para el menú de navegación */
+.main_nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.main_nav_list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main_nav_item {
+  margin: 0 15px;
+}
+
+.main_nav_item a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.main_nav_item a:hover,
+.main_nav_item a.active {
+  color: #ff6b6b;
+}
+
+/* Estilos para el carrito */
+.cart_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cart_icon {
+  position: relative;
+  display: inline-block;
+}
+
+.cart_icon i {
+  font-size: 24px;
+  color: #333;
+}
+
+.cart_count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para el submenú */
+.submenu {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 10px 0;
+}
+
+.submenu_list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.submenu_item {
+  margin: 0 15px;
+}
+
+.submenu_item a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.submenu_item a:hover,
+.submenu_item a.active {
+  color: #ff6b6b;
+}
+
+/* Estilos responsivos */
+@media (max-width: 991px) {
+  .main_nav {
+    margin-top: 15px;
+  }
+
+  .main_nav_list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main_nav_item {
+    margin: 5px 0;
+  }
+}
+
+/* Asegurarse de que estos estilos se apliquen a todas las páginas */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos para el header fijo */
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Contenedor principal del header */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo-container {
+  flex: 0 0 auto;
+}
+
+.logo-container img {
+  max-height: 60px;
+  width: auto;
+}
+
+/* Menú de navegación */
+.nav-container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  margin: 0 15px;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+  color: #ff4545;
+}
+
+/* Carrito */
+.cart-container {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.cart-icon {
+  font-size: 24px;
+  color: #333;
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #ff4545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Menú móvil */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Espacio para el contenido debajo del header fijo */
+.header-spacer {
+  height: 80px; /* Ajustar según la altura del header */
+}
+
+/* Estilos para categorías */
+.categories-nav {
+  background-color: #f8f8f8;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-item {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 5px 10px;
+}
+
+.category-item:hover,
+.category-item.active {
+  color: #ff4545;
+}
+
+/* Estilos para el footer */
+.footer {
+  background-color: #f8f8f8;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 50px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  margin-bottom: 15px;
+}
+
+.footer-logo img {
+  max-height: 40px;
+  width: auto;
+}
+
+.footer-text {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer-social a {
+  margin: 0 10px;
+  color: #666;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #ff4545;
+}
+
+.footer-links {
+  margin-top: 15px;
+}
+
+.footer-links a {
+  color: #666;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ff4545;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 10px;
+  }
+
+  .logo-container img {
+    max-height: 50px;
+  }
+
+  .nav-container {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .nav-container.active {
+    display: block;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .nav-menu li {
+    margin: 10px 20px;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .categories-container {
+    flex-wrap: wrap;
+  }
+
+  .category-item {
+    margin: 5px;
+  }
+}
+
+/* Asegurarse de que el header se muestre correctamente en todas las páginas */
+body {
+  padding-top: 0; /* Eliminar cualquier padding que pueda estar causando problemas */
+  margin-top: 0;
+}
+
+/* Estilos específicos para la página de productos */
+.productos-page .header-fixed {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+}

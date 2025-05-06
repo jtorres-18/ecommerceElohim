@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="website icon" type="png" href="https://i.postimg.cc/nrGQ8SSX/logo.png">
+		<!-- Asegúrate de tener esta línea para Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<title>Elohim</title>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<div class="principal1">
+			<header>
+				<a class="logo">
+					<img src="https://i.postimg.cc/nrGQ8SSX/logo.png" alt="Logo Empresa">
+				</a>
+				<ul class="nav-center"> <!-- Añade la clase nav-center -->
+					<li><a onclick="mostrar();" href="#informacion" class="botonJj">INFORMACION</a></li>
+					<li><a onclick="mostrar();" href="mostrar/productos.php" class="botonJj">PRODUCTOS</a></li>
+					<li><a onclick="mostrar();" href="#contacto" class="botonJj">CONTACTO</a></li>
+				</ul>
+				<a onclick="mostrar();" href="sesion/login.html" class="user-icon-container">
+					<i id="persona" class="fas fa-user user-icon"></i>
+				</a>
+			</header>
+			<section class="content-banner">
+				<h2>Panaderia <br />Y Reposteria</h2>
+				<h1>¡Hola! Te damos la bienvenida a una de las mejores panaderías<br>
+					de Puerto Berrio. Todos nuestros productos están elaborados con mucho<br>
+					amor para ti y tu familia. Ven y disfruta del mejor pan mariquiteño <br>
+					Esperamos de todo corazón que puedas deleitarte con lo <br>
+					mejor de la panadería.
+				</h1>
+			</section>
+		</div>
+		<main class="main-content">
+			<section class="container container-features"></section>
+			<section class="container top-products">
+				<h1 class="heading-1">Nuestros Productos</h1>
+				<div class="container-products">
+					<!-- Producto 1 -->
+					<div class="card-product">
+						<div class="container-img">
+							<img src="https://i.postimg.cc/xdVrHn4y/Imagen-de-Whats-App-2023-10-16-a-las-13-44-27-6475b3e9.jpg" alt="Cafe Irish" />
+						</div>
+						<div class="content-card-product">
+							<div class="stars">
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+							</div>
+							<h3>postre estrella</h3>
+							<p class="price">$5.000 <span>$6.000</span></p>
+						</div>
+					</div>
+					<!-- Producto 2 -->
+					<div class="card-product">
+						<div class="container-img">
+							<img
+								src="https://i.postimg.cc/rmqvngcD/Imagen-de-Whats-App-2023-10-16-a-las-13-44-29-6e6178f5.jpg"
+								alt="Cafe incafe-ingles.jpg"
+							/>
+							
+						</div>
+						<div class="content-card-product">
+							<div class="stars">
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+							</div>
+							<h3>postre de fresa</h3>
+							<p class="price">$6.000 <span>$7.000</span></p>
+						</div>
+					</div>
+					<!--  -->
+					<div class="card-product">
+						<div class="container-img">
+							<img
+								src="https://i.postimg.cc/h42qwFXc/Imagen-de-Whats-App-2023-10-16-a-las-13-44-27-6c1ef703.jpg"
+								alt="Cafe Australiano"
+							/>
+							
+						</div>
+						<div class="content-card-product">
+							<div class="stars">
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+							</div>
+							<h3>postre corazon</h3>
+							
+							<p class="price">$4.000</p>
+						</div>
+					</div>
+					<!--  -->
+					<div class="card-product">
+						<div class="container-img">
+							<img src="https://i.postimg.cc/xCRSnhgG/Imagen-de-Whats-App-2023-10-16-a-las-13-43-59-5c8dc29c.jpg" alt="Cafe Helado" />
+							
+						</div>
+						<div class="content-card-product">
+							<div class="stars">
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-solid fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+							</div>
+							<h3>pan agridulce</h3>
+							
+							<p class="price">$3.500</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="cuadrar">
+				<a href="mostrar/productos.php" class="btn-read-more">Ver mas productos</a>
+			</div>
+			<section id="informacion" class="container-blogs">
+				<div class="contenedor-formulario register">
+					<div class="informacion"> 
+						<div class="info-datos">
+							<img src="https://i.postimg.cc/6ptyV853/farhan-shaikh-r-VOIf6tc5-DU-unsplash.jpg" class="Imagenes1">
+						</div>
+					</div>
+					<div class="formulario-crear">
+						<div class="formulario-crear-datos">
+							<div class="content-blog">
+								<h3>VEN AL BRUCH DE LOS DOMINGOS</h3>
+								<p>
+									Tenemos panes con quesos para que  <br>
+									puedas disfrutarlos con un espumoso café <br>
+									100% colombiano.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="container-blogs2">
+				<div class="contenedor-formulario2 register">
+					<div class="formulario-crear2">
+						<div class="formulario-crear-datos">
+							<div class="content-blog">
+								<h3>DISFRUTA DE UN TÉ CON TUS AMIG@S</h3>
+								<p>
+									Tenemos diferentes tipos de té elaborados<br>
+									naturalmente por nuestros campesinos.<br>
+									Estamos seguros que te encantará.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="informacion2"> 
+						<div class="info-datos2">
+							<img src="https://i.postimg.cc/qvJRH5Fw/conor-brown-sqk-Xyyj4-Wd-E-unsplash.jpg" class="Imagenes2">
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="contacto" class="container-blogs">
+				<div class="contenedor-formulario register">
+					<div class="informacion"> 
+						<div class="info-datos">
+							<img src="https://i.postimg.cc/WzSfxzCs/bread-4183225-1280.jpg" class="Imagenes1">
+						</div>
+					</div>
+					<div class="formulario-crear">
+						<div class="formulario-crear-datos">
+							<div class="content-blog">
+								<h3>CONTACTA CON NOSOTROS</h3>
+								<p>
+									Si quieres hacer una reserva, tienes algunas sugerencias o<br>
+									simplemente quieres saludar, escribenos a:<br>
+									<a href="#" class="correo">elohimabmin23@gmail.com</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="container-blogs2">
+				<div class="contenedor-formulario2 register">
+					<div class="formulario-crear2">
+						<div class="formulario-crear-datos">
+							<div class="content-blog">
+								<h3>¿SABES DÓNDE ESTAMOS?</h3>
+								<p>
+									CRA 5 #49-00<br>
+									Puerto Berrio Antioquia<br>
+									Hecho en Colombia
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="informacion2"> 
+						<div class="info-datos2">
+							<img src="https://i.postimg.cc/q71Fmjhz/bread-4077812-1920.jpg" class="Imagenes2">
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<div class="footer" id="reservas">
+			<div class="iconos" style="text-align: center;">
+				<a href="https://www.instagram.com/panaderia_elohim23/" target="_blank">
+					<i class='bx bxl-instagram'></i>
+				</a>
+				<a href="https://www.facebook.com/profile.php?id=61552976203608" target="_blank">
+					<i class='bx bxl-facebook'></i>
+				</a>
+			</div>
+		</div>
+		<script
+			src="https://kit.fontawesome.com/81581fb069.js"
+			crossorigin="anonymous"
+		></script>
+	<button id="scroll-to-top-btn"><i class='bx bx-chevrons-up'></i></button>
+		<script defer>
+			function mostrar() {
+				document.getElementById("check").checked = false
+			}
+			// Obtener el botón y el evento "scroll"
+			const scrollButton = document.getElementById("scroll-to-top-btn");
+			window.addEventListener("scroll", () => {
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			scrollButton.style.display = "block";
+				} else {
+			scrollButton.style.display = "none";
+			}
+			});
+
+			// Agregar un evento click para el botón
+			scrollButton.addEventListener("click", () => {
+				document.body.scrollTop = 0; // Para navegadores antiguos
+				document.documentElement.scrollTop = 0; // Para navegadores modernos
+			});
+		</script>
+		<!-- Agregar el script de SweetAlert2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			// Cargar el chatbot dinámicamente con jQuery
+			$(document).ready(function() {
+				$.get('/panaderia/chatbot/chatbot.html')
+					.done(function(data) {
+						$('body').append(data);
+					})
+					.fail(function(jqXHR, textStatus, errorThrown) {
+						console.error('Error al cargar el chatbot:', textStatus, errorThrown);
+						// Mensaje opcional para el usuario
+						alert('El servicio de chat no está disponible temporalmente');
+					});
+			});
+		</script>
+	</body>
+
