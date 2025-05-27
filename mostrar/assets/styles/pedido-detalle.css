@@ -1,0 +1,290 @@
+/* Estilos para la página de detalle de pedido */
+.order-detail-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .order-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .order-date {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+  }
+  
+  .order-date i {
+    margin-right: 0.5rem;
+  }
+  
+  .order-status {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .order-status i {
+    margin-right: 0.5rem;
+  }
+  
+  .status-pendiente {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-procesando {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  
+  .status-enviado {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-entregado {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .status-cancelado {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* Tarjetas de información */
+  .order-info-card,
+  .order-address-card,
+  .order-notes-card,
+  .order-products-card,
+  .order-timeline-card,
+  .order-rating-card,
+  .order-rating-prompt {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    height: 100%;
+  }
+  
+  .order-info-card h3,
+  .order-address-card h3,
+  .order-notes-card h3,
+  .order-products-card h3,
+  .order-timeline-card h3,
+  .order-rating-card h3,
+  .order-rating-prompt h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Información del pedido */
+  .order-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .info-label {
+    color: #6c757d;
+  }
+  
+  .info-value {
+    font-weight: 500;
+  }
+  
+  .info-value.price {
+    color: #e67e22;
+    font-weight: 600;
+  }
+  
+  /* Dirección de entrega */
+  .order-address-card address {
+    font-style: normal;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  
+  .contact-info {
+    color: #6c757d;
+  }
+  
+  .contact-info div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Tabla de productos */
+  .order-items-table {
+    margin-bottom: 0;
+  }
+  
+  .order-items-table th {
+    border-top: none;
+    border-bottom: 2px solid #f0f0f0;
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  .item-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .item-name {
+    font-weight: 500;
+  }
+  
+  .price-total {
+    font-weight: 600;
+    color: #e67e22;
+  }
+  
+  /* Línea de tiempo del pedido */
+  .order-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  
+  .order-timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #e9ecef;
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+  
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  
+  .timeline-icon {
+    position: absolute;
+    left: -2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    z-index: 1;
+  }
+  
+  .timeline-icon.status-pendiente {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+  }
+  
+  .timeline-icon.status-procesando {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+  }
+  
+  .timeline-icon.status-enviado {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  
+  .timeline-icon.status-entregado {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+  }
+  
+  .timeline-icon.status-cancelado {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  
+  .timeline-content {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  
+  .timeline-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .timeline-content time {
+    display: block;
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Valoración del pedido */
+  .rating-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 0.25rem;
+    color: #f39c12;
+  }
+  
+  .rating-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+  }
+  
+  .rating-comment {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  
+  /* Responsive */
+  @media (max-width: 767.98px) {
+    .order-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+  
+    .timeline-content {
+      margin-left: 0.5rem;
+    }
+  }
+  
